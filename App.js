@@ -116,7 +116,8 @@ function StackScreen() {
         name="Home"
         component={HomeScreen}
         options={{
-          // title: 'my home',
+          // title: 'my home',  
+          // Replace the current header with a custom component
           headerTitle: (props) => <LogoTitle {...props} />,
         }}
       />
