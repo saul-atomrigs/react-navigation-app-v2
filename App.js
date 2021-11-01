@@ -77,13 +77,53 @@ function DetailsScreen({ route, navigation }) {
   )
 }
 
+function ProfileScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Profile screen</Text>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button
+        title="Update the title"
+        onPress={() => navigation.setOptions({ title: 'Updated!' })}
+      />
+    </View>
+  );
+}
+
+function StackScreen() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          title: 'my home',
+          headerStyle: {
+            backgroundColor: '#f4511e',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      />
+      <Stack.Screen
+        name='Profile'
+        component={ProfileScreen}
+        options={({ route }) => ({ title: route.params.name })}
+      />
+    </Stack.Navigator>
+  )
+}
+
 const Stack = createNativeStackNavigator()
+
 
 export default function App() {
   return (
     <NavigationContainer>
       {/* Initial route */}
-      <Stack.Navigator initialRouteName='CreatePost'>
+      <Stack.Navigator initialRouteName=''>
         <Stack.Screen
           name="Home" // name of the route
           component={HomeScreen} // component to render
@@ -98,17 +138,11 @@ export default function App() {
           name="CreatePost"
           component={CreatePostScreen}
         />
+        <Stack.Screen
+          name="StackScreen"
+          component={StackScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
