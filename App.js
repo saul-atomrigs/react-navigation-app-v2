@@ -92,19 +92,22 @@ function ProfileScreen({ navigation }) {
 
 function StackScreen() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{ // any screen that belongs to StackScreen will share these properties
+        headerStyle: {
+          backgroundColor: '#e6e6e6',
+        },
+        headerTintColor: '#000000',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    >
       <Stack.Screen
         name="Home"
         component={HomeScreen}
         options={{
           title: 'my home',
-          headerStyle: {
-            backgroundColor: '#f4511e',
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
         }}
       />
       <Stack.Screen
@@ -123,7 +126,7 @@ export default function App() {
   return (
     <NavigationContainer>
       {/* Initial route */}
-      <Stack.Navigator initialRouteName=''>
+      <Stack.Navigator initialRouteName='StackScreen'>
         <Stack.Screen
           name="Home" // name of the route
           component={HomeScreen} // component to render
