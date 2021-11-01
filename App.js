@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
@@ -90,6 +90,15 @@ function ProfileScreen({ navigation }) {
   );
 }
 
+function LogoTitle() {
+  return (
+    <Image
+      style={{ width: 30, height: 30, backgroundColor: 'black' }}
+      source={require('./assets/icon.png')}
+    />
+  )
+}
+
 function StackScreen() {
   return (
     <Stack.Navigator
@@ -107,7 +116,8 @@ function StackScreen() {
         name="Home"
         component={HomeScreen}
         options={{
-          title: 'my home',
+          // title: 'my home',
+          headerTitle: (props) => <LogoTitle {...props} />,
         }}
       />
       <Stack.Screen
