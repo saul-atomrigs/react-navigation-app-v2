@@ -15,12 +15,24 @@ function HomeScreen({ navigation }) { // FIXME: navigation must be defined
   )
 }
 
-function DetailsScreen() {
+function DetailsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Details Screen</Text>
+      <Button
+        title='Go to details...again'
+        onPress={() => navigation.push('Details')} // push is a method that takes a screen name as a parameter (to where we want to mmove to)
+      />
+      <Button
+        title='Go to Home'
+        onPress={() => navigation.navigate('Home')} // navigate is a method that takes a screen name as a parameter (to where we want to mmove to)
+      />
+      <Button
+        title='Go back'
+        onPress={() => navigation.goBack()} // goBack is a method that takes a screen name as a parameter (to where we want to mmove to)
+      />
     </View>
-  );
+  )
 }
 
 const Stack = createNativeStackNavigator()
