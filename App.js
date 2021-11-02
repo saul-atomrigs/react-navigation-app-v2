@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
+import React, { useEffect, useState, useLayoutEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+
+import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -90,6 +91,19 @@ function DetailsScreen({ route, navigation }) {
   )
 }
 
+function Profile() {
+  useFocusEffect(
+    useCallback(() => {
+      // Do something when the screen is focused
+
+      return () => {
+        // Do something when the screen is unfocused
+      }
+    }, [])
+  )
+  return <ProfileContent />
+}
+
 function ProfileScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -165,7 +179,8 @@ const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator();
 
 
-export default function App() {
+export default function App(props) {
+  const isLoggedIn = props.isLoggedIn
   return (
     <NavigationContainer>
       {/* Initial route */}
@@ -188,15 +203,6 @@ export default function App() {
           name="StackScreen"
           component={StackScreen}
         />
-        <Stack.Screen
-          name="Root"
-          component={Root}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name='Feed'
-          component={Settings}
-        />
         {isLoggedIn ? (
           // Screens for logged in users
           <Stack.Group>
@@ -215,6 +221,27 @@ export default function App() {
           <Stack.Screen name="Help" component={Help} />
           <Stack.Screen name="Invite" component={Invite} />
         </Stack.Group>
+
+        <Tab.Screen name="First">
+          {() => (
+            <SettingsStack.Navigator>
+              <SettingsStack.Screen
+                name="Settings"
+                component={SettingsScreen}
+              />
+              <SettingsStack.Screen name="Profile" component={ProfileScreen} />
+            </SettingsStack.Navigator>
+          )}
+        </Tab.Screen>
+        <Tab.Screen name="Second">
+          {() => (
+            <HomeStack.Navigator>
+              <HomeStack.Screen name="Home" component={HomeScreen} />
+              <HomeStack.Screen name="Details" component={DetailsScreen} />
+            </HomeStack.Navigator>
+          )}
+        </Tab.Screen>
+
       </Stack.Navigator>
     </NavigationContainer>
   );
