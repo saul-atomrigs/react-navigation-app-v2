@@ -1,9 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 function HomeScreen({ navigation, route }) { // FIXME: navigation must be defined
+  const [count, setCount] = useState(0)
+
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Button onPress={() => setCount(c => c + 1)} title="Update count" />
+      ),
+    });
+  }, [navigation]);
+
   useEffect(() => {
     if (route.params?.post) {
 
@@ -12,6 +23,7 @@ function HomeScreen({ navigation, route }) { // FIXME: navigation must be define
 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Count: {count}</Text>;
       <Button
         title="Create post"
         onPress={() => {
