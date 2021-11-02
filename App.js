@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Button, TextInput, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Drawer } from '@material-ui/core';
 
 function HomeScreen({ navigation, route }) { // FIXME: navigation must be defined
   const [count, setCount] = useState(0)
@@ -160,15 +159,7 @@ function Home() {
   )
 }
 
-function Root() {
-  return (
-    <Drawer.Navigator>
-      <Drawer.Screen name="Home" component={Home} />
-      <Drawer.Screen name="Profile" component={Profile} />
-      <Drawer.Screen name="Settings" component={Settings} />
-    </Drawer.Navigator>
-  )
-}
+
 
 const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator();
@@ -206,6 +197,24 @@ export default function App() {
           name='Feed'
           component={Settings}
         />
+        {isLoggedIn ? (
+          // Screens for logged in users
+          <Stack.Group>
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Profile" component={Profile} />
+          </Stack.Group>
+        ) : (
+          // Auth screens
+          <Stack.Group screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="SignIn" component={SignIn} />
+            <Stack.Screen name="SignUp" component={SignUp} />
+          </Stack.Group>
+        )}
+        {/* Common modal screens */}
+        <Stack.Group screenOptions={{ presentation: 'modal' }}>
+          <Stack.Screen name="Help" component={Help} />
+          <Stack.Screen name="Invite" component={Invite} />
+        </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>
   );
