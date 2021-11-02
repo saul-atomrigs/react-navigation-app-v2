@@ -119,6 +119,13 @@ function StackScreen() {
           // title: 'my home',  
           // Replace the current header with a custom component
           headerTitle: (props) => <LogoTitle {...props} />,
+          headerRight: () => (
+            <Button
+              onPress={() => (alert('this is a button!'))}
+              title='info'
+              color='#fff'
+            />
+          )
         }}
       />
       <Stack.Screen
@@ -160,3 +167,4 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
