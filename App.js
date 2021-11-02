@@ -2,6 +2,7 @@ import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { Tab } from '@material-ui/core';
 
 function HomeScreen({ navigation, route }) { // FIXME: navigation must be defined
   const [count, setCount] = useState(0)
@@ -149,6 +150,15 @@ function StackScreen() {
   )
 }
 
+function Home() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Feed" component={Feed} />
+      <Tab.Screen name="Messages" component={Messages} />
+    </Tab.Navigator>
+  )
+}
+
 const Stack = createNativeStackNavigator()
 
 
@@ -159,8 +169,8 @@ export default function App() {
       <Stack.Navigator initialRouteName='StackScreen'>
         <Stack.Screen
           name="Home" // name of the route
-          component={HomeScreen} // component to render
-          options={{ title: 'Overview' }} // options for the route
+          component={Home} // component to render
+          options={{ headerShown: false }} // options for the route
         />
         <Stack.Screen
           name="Details"
@@ -174,6 +184,14 @@ export default function App() {
         <Stack.Screen
           name="StackScreen"
           component={StackScreen}
+        />
+        <Stack.Screen
+          name='Profile'
+          component={Profile}
+        />
+        <Stack.Screen
+          name='Settings'
+          component={Settings}
         />
       </Stack.Navigator>
     </NavigationContainer>
