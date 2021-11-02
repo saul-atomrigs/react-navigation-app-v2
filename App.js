@@ -5,6 +5,8 @@ import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import TabNavigation from './TabNavigation';
+
 function HomeScreen({ navigation, route }) { // FIXME: navigation must be defined
   const [count, setCount] = useState(0)
 
@@ -114,7 +116,7 @@ function ProfileScreen({ navigation }) {
         onPress={() => navigation.setOptions({ title: 'Updated!' })}
       />
     </View>
-  );
+  )
 }
 
 function LogoTitle() {
@@ -187,7 +189,7 @@ export default function App(props) {
       <Stack.Navigator initialRouteName='Home'>
         <Stack.Screen
           name="Home" // name of the route
-          component={Home} // component to render
+          component={HomeScreen} // component to render
           options={{ headerShown: false }} // options for the route
         />
         <Stack.Screen
@@ -212,14 +214,14 @@ export default function App(props) {
         ) : (
           // Auth screens
           <Stack.Group screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="SignIn" component={SignIn} />
-            <Stack.Screen name="SignUp" component={SignUp} />
+            {/* <Stack.Screen name="SignIn" component={SignIn} />
+            <Stack.Screen name="SignUp" component={SignUp} /> */}
           </Stack.Group>
         )}
         {/* Common modal screens */}
         <Stack.Group screenOptions={{ presentation: 'modal' }}>
-          <Stack.Screen name="Help" component={Help} />
-          <Stack.Screen name="Invite" component={Invite} />
+          {/* <Stack.Screen name="Help" component={Help} />
+          <Stack.Screen name="Invite" component={Invite} /> */}
         </Stack.Group>
 
         <Tab.Screen name="First">
