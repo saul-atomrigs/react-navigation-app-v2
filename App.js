@@ -7,9 +7,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import TabNavigation from './TabNavigation';
 
+
 function HomeScreen({ navigation, route }) { // FIXME: navigation must be defined
   const [count, setCount] = useState(0)
-
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -39,6 +39,7 @@ function HomeScreen({ navigation, route }) { // FIXME: navigation must be define
   )
 }
 
+
 function CreatePostScreen({ navigation, route }) {
   const [postText, setPostText] = useState('')
   return (
@@ -61,9 +62,11 @@ function CreatePostScreen({ navigation, route }) {
           });
         }}
       />
+      <TabNavigation />
     </>
   )
 }
+
 
 function DetailsScreen({ route, navigation }) {
   const { itemId, otherParam } = route.params;
@@ -93,6 +96,7 @@ function DetailsScreen({ route, navigation }) {
   )
 }
 
+
 function Profile() {
   useFocusEffect(
     useCallback(() => {
@@ -105,6 +109,7 @@ function Profile() {
   )
   return <ProfileContent />
 }
+
 
 function ProfileScreen({ navigation }) {
   return (
@@ -119,6 +124,7 @@ function ProfileScreen({ navigation }) {
   )
 }
 
+
 function LogoTitle() {
   return (
     <Image
@@ -127,6 +133,7 @@ function LogoTitle() {
     />
   )
 }
+
 
 function StackScreen() {
   return (
@@ -166,6 +173,7 @@ function StackScreen() {
   )
 }
 
+
 function Home() {
   return (
     <Tab.Navigator>
@@ -174,7 +182,6 @@ function Home() {
     </Tab.Navigator>
   )
 }
-
 
 
 const Stack = createNativeStackNavigator()

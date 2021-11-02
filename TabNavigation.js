@@ -75,8 +75,8 @@ export default function TabNavigation() {
                     tabBarInactiveTintColor: 'gray',
                 })}
             >
-                <Tab.Screen name="Home" component={HomeStackScreen} options={{ tabBarBadge: 3 }} />
-                <Tab.Screen name="Settings" component={SettingsStackScreen} />
+                <Tab.Screen name="Home" component={HomeScreen} options={{ tabBarBadge: 3 }} />
+                <Tab.Screen name="Settings" component={SettingsScreen} />
             </Tab.Navigator>
         </NavigationContainer>
     )
