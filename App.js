@@ -62,7 +62,6 @@ function CreatePostScreen({ navigation, route }) {
           });
         }}
       />
-      <TabNavigation />
     </>
   )
 }
