@@ -61,3 +61,18 @@ client.feed('user', 'me').followStats()
 // count by how many timelines follow me 
 // count by how many markets are followed 
 client.feed.followStats({ followerSlugs: ['timeline'], followingSlugs: ['market'] })
+
+
+// Real time changes
+function failCallback(data) {
+    alert('something went wrong, check the console logs');
+    console.log(data);
+}
+
+const user1 = client.feed('user', '1', token);
+const subscription = user1.subscribe(function callback(data) {
+    alert(data);
+}).then(null, failCallback);
+
+// The returned Subscription object has a method cancel 
+// that will remove the listener from this channel  
