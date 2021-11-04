@@ -1,6 +1,10 @@
 import stream from 'getstream'
 
-const client = stream.connect('753adfaa3x87', 'xwrybggzyk4um6v8c5ep79r7hqce5twj9j6pjj99584c7b2r36eqjejcp4h8te9y', location = 'us-east')
+const client = stream.connect(
+    '753adfaa3x87',
+    'xwrybggzyk4um6v8c5ep79r7hqce5twj9j6pjj99584c7b2r36eqjejcp4h8te9y',
+    location = 'us-east'
+)
 
 // add an activity to Scott's notification feed  
 const scott = client.feed('notification', 'scott')
